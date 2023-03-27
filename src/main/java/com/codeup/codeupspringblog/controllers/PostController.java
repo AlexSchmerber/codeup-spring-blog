@@ -31,14 +31,16 @@ class PostController {
     }
 
     @RequestMapping(path = "/posts/create", method = RequestMethod.GET)
-    public String getCreatePost() {
+    public String getCreatePost(Model model) {
+        model.addAttribute("post", new Post());
         return "/posts/create";
     }
 
     @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
-    @ResponseBody
-    public String postCreatePost() {
-        return "Create Post";
+    public String postCreatePost(@ModelAttribute Post post, Model model) {
+//        model.addAttribute("post", post);
+        postDao.save(post);
+        return "redirect:/show-post";
     }
 
     @GetMapping("/roll-dice")
@@ -65,11 +67,6 @@ class PostController {
     }
     @GetMapping("/show-post")
     public String showPosts(Model model){
-//        create list of posts
-//        List<Post> postList = new ArrayList<>();
-//        postList.add(new Post(1, "Example Title 1", "Body text"));
-//        postList.add(new Post(2, "Example Title 2", "Body text"));
-//        postList.add(new Post(3, "Example Title 3", "Body text"));
         model.addAttribute("postList", postDao.findAll());
         return "/posts/show";
     }

@@ -2,16 +2,16 @@
 <html xmlns:th="http://www/thymeleaf.org">
 <head>
     <div th:replace="/partials/header"></div>
-    <title>Index</title>
+    <title>Create</title>
 </head>
 <body>
 <div th:replace="/partials/navbar"></div>
 <h1>New Post</h1>
 <div>
-    <form action="/posts/create" method="post">
-        <input type="text" name="cohort" id="title" class="field" />
-        <input type="text" name="cohort" id="body" class="field" />
-        <button>Create</button>
+    <form action="#" th:action="@{/posts/create}" th:object="${post}" method="post">
+        <p>Title: <input type="text" th:field="*{title}" /></p>
+        <p>Body: <input type="text" th:field="*{body}" /></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
     </form>
 </div>
 
