@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www/thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <div th:replace="/partials/header"></div>
     <title>Index</title>
 </head>
 <body>
+<div th:replace="/partials/navbar"></div>
 
+<h2 th:text="${post.title}">(Post Title)</h2>
+<p th:text="${post.body}">(Post Body)</p>
+<p th:text="${post.id}">(Post Id)</p>
+
+<div th:replace="/partials/footer"></div>
 </body>
 </html>

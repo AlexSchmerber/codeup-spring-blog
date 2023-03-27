@@ -51,18 +51,20 @@ class PostController {
         model.addAttribute("response", "You guessed: " + number + "\nThe correct answer was " + randomDiceRoll + "\n" + response);
         return "result";
     }
-    @GetMapping("/index-posts")
+    @GetMapping("/index-posts/{postId}")
     public String indexPost(Model model, @PathVariable long postId){
 //        create new post using just id
-        model.addAttribute("post", new Post());
-        return "index";
+        model.addAttribute("post", new Post(postId, "New Title 1", "New body 1"));
+        return "/posts/index";
     }
     @GetMapping("/show-post")
     public String showPosts(Model model){
 //        create list of posts
         List<Post> postList = new ArrayList<>();
-
-        model.addAttribute("post", postList);
-        return "show";
+        postList.add(new Post(1, "Example Title 1", "Body text"));
+        postList.add(new Post(2, "Example Title 2", "Body text"));
+        postList.add(new Post(3, "Example Title 3", "Body text"));
+        model.addAttribute("postList", postList);
+        return "/posts/show";
     }
 }
