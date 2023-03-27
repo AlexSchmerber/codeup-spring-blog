@@ -1,5 +1,6 @@
 package com.codeup.codeupspringblog;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -7,8 +8,16 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class Post {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
+
+    @Column(nullable = false, length = 100)
     String title;
+
+    @Column(nullable = false)
     String body;
 }

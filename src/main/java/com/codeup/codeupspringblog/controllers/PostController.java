@@ -1,6 +1,8 @@
 package com.codeup.codeupspringblog.controllers;
 
 import com.codeup.codeupspringblog.Post;
+import com.codeup.codeupspringblog.repositories.PostRepository;
+import lombok.AllArgsConstructor;
 import org.apache.coyote.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 class PostController {
+
+    private final PostRepository postDao;
+
+
     @RequestMapping(path = "/posts", method = RequestMethod.GET)
     @ResponseBody
     public String postPage() {
@@ -24,9 +31,8 @@ class PostController {
     }
 
     @RequestMapping(path = "/posts/create", method = RequestMethod.GET)
-    @ResponseBody
     public String getCreatePost() {
-        return "Create Post";
+        return "/posts/create";
     }
 
     @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
@@ -60,11 +66,11 @@ class PostController {
     @GetMapping("/show-post")
     public String showPosts(Model model){
 //        create list of posts
-        List<Post> postList = new ArrayList<>();
-        postList.add(new Post(1, "Example Title 1", "Body text"));
-        postList.add(new Post(2, "Example Title 2", "Body text"));
-        postList.add(new Post(3, "Example Title 3", "Body text"));
-        model.addAttribute("postList", postList);
+//        List<Post> postList = new ArrayList<>();
+//        postList.add(new Post(1, "Example Title 1", "Body text"));
+//        postList.add(new Post(2, "Example Title 2", "Body text"));
+//        postList.add(new Post(3, "Example Title 3", "Body text"));
+        model.addAttribute("postList", postDao.findAll());
         return "/posts/show";
     }
 }
