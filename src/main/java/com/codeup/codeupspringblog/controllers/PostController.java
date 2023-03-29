@@ -39,9 +39,8 @@ class PostController {
 
     @PostMapping("/posts/create")
     public String postCreatePost(@ModelAttribute Post post) {
-        List<Post> postList = new ArrayList<>();
-        User user = new User(12L, "user1", "user@email.com", "password");
-
+//        List<Post> postList = new ArrayList<>();
+        post.setUser(userDao.findById(1));
         postDao.save(post);
         return "redirect:/show-post";
     }
@@ -50,6 +49,7 @@ class PostController {
     public String indexPost(Model model, @PathVariable long postId){
 //        create new post using just id
 //        model.addAttribute("post", new Post(postId, "New Title 1", "New body 1"));
+        model.addAttribute("user", userDao.findById(postId));
         return "/posts/index";
     }
     @GetMapping("/show-post")

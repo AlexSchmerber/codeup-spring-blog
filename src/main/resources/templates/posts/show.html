@@ -10,7 +10,9 @@
 <h1>All posts!</h1>
 <table>
     <tr th:each="post : ${postList}">
-        <td th:text="${post.title}"></td>
+        <a th:href="@{x(id=${post.id})}">
+            <td th:text="${post.title}"></td>
+        </a>
         <td th:text="${post.body}"></td>
     </tr>
 </table>
