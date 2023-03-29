@@ -1,9 +1,10 @@
 package com.codeup.codeupspringblog.controllers;
 
-import com.codeup.codeupspringblog.Post;
+import com.codeup.codeupspringblog.models.Post;
+import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.PostRepository;
+import com.codeup.codeupspringblog.repositories.UserRepository;
 import lombok.AllArgsConstructor;
-import org.apache.coyote.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,8 @@ import java.util.List;
 class PostController {
 
     private final PostRepository postDao;
+
+    private final UserRepository userDao;
 
 
 //    @GetMapping("/posts")
@@ -36,6 +39,9 @@ class PostController {
 
     @PostMapping("/posts/create")
     public String postCreatePost(@ModelAttribute Post post) {
+        List<Post> postList = new ArrayList<>();
+        User user = new User(12L, "user1", "user@email.com", "password");
+
         postDao.save(post);
         return "redirect:/show-post";
     }
@@ -43,7 +49,7 @@ class PostController {
     @GetMapping("/index-posts/{postId}")
     public String indexPost(Model model, @PathVariable long postId){
 //        create new post using just id
-        model.addAttribute("post", new Post(postId, "New Title 1", "New body 1"));
+//        model.addAttribute("post", new Post(postId, "New Title 1", "New body 1"));
         return "/posts/index";
     }
     @GetMapping("/show-post")

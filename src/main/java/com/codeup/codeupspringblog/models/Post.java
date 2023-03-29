@@ -1,7 +1,9 @@
-package com.codeup.codeupspringblog;
+package com.codeup.codeupspringblog.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,4 +22,8 @@ public class Post {
 
     @Column(nullable = false)
     String body;
+
+    @ManyToOne
+    @JoinColumn (name = "user_id")
+    private User user;
 }
