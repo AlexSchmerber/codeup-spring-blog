@@ -1,5 +1,11 @@
 <nav th:fragment="navbar" class="navbar bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+    <div class="container-fluid d-flex">
+        <div class="inline-block me-auto">
+            <a class="navbar-brand text text-dark.text-gradient" href="#">Posties</a>
+        </div>
+        <div class="inline-block">
+            <a class="link-secondary" href="/show-post">Browse</a>
+            <a class="link-secondary" href="/posts/create">Create</a>
+        </div>
     </div>
 </nav>
