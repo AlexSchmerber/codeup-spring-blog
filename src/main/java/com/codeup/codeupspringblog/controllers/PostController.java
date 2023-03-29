@@ -49,9 +49,17 @@ class PostController {
     public String indexPost(Model model, @PathVariable long postId){
 //        create new post using just id
 //        model.addAttribute("post", new Post(postId, "New Title 1", "New body 1"));
-        model.addAttribute("user", userDao.findById(postId));
+        model.addAttribute("user", postDao.findById(postId).getUser());
         return "/posts/index";
     }
+
+    @GetMapping("/post/{postId}/edit")
+    public String editPost(Model model, @PathVariable long postId){
+        model.addAttribute("post", postDao.getReferenceById(postId));
+        return "/posts/edit";
+    }
+
+
     @GetMapping("/show-post")
     public String showPosts(Model model){
         model.addAttribute("postList", postDao.findAll());
