@@ -6,28 +6,30 @@
 </head>
 <body>
 <div th:replace="/partials/navbar"></div>
-<div class="flex-container" id="page-content">
+<div class="flex-container d-flex" id="page-content">
     <h1>All posts!</h1>
-    <div th:each="post : ${postList}" class="card" style="width: 18rem;">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">An item</li>
-            <li class="list-group-item">A second item</li>
-            <li class="list-group-item">A third item</li>
-        </ul>
-        <div class="card-body">
-            <h5 class="card-title">
-                <a th:href="@{x(id=${post.id})}">
-                    <span th:text="${post.title}"></span>
-                </a>
-            </h5>
-            <span th:text="${post.body}"></span>
-        </div>
-        <div class="card-body">
-            <a href="#" class="card-link">View More</a>
-            <a href="#" class="card-link">Visit Author</a>
+    <div class="d-flex justify-content-around align-items-around w-75 wrap mx-auto">
+        <div th:each="post : ${postList}" class="card" style="width: 18rem;">
+<!--            <ul class="list-group list-group-flush">-->
+<!--                <li class="list-group-item">An item</li>-->
+<!--                <li class="list-group-item">A second item</li>-->
+<!--                <li class="list-group-item">A third item</li>-->
+<!--            </ul>-->
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a th:href="@{/index-posts(id=${post.id})}">
+                        <span th:text="${post.title}"></span>
+                    </a>
+                </h5>
+                <hr>
+                <span th:text="${post.body}"></span>
+            </div>
+            <div class="card-body">
+                <a href="#" class="card-link">View More</a>
+                <a href="#" class="card-link">Visit Author</a>
+            </div>
         </div>
     </div>
-
 </div>
 
 <div th:replace="/partials/footer"></div>

@@ -4,6 +4,7 @@ import com.codeup.codeupspringblog.models.Post;
 import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.PostRepository;
 import com.codeup.codeupspringblog.repositories.UserRepository;
+import com.codeup.codeupspringblog.services.EmailService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,8 @@ class PostController {
     private final PostRepository postDao;
 
     private final UserRepository userDao;
+
+    private final EmailService emailService;
 
 
 //    @GetMapping("/posts")
@@ -41,6 +44,7 @@ class PostController {
     public String postCreatePost(@ModelAttribute Post post) {
 //        List<Post> postList = new ArrayList<>();
         post.setUser(userDao.findById(1));
+        emailService.prepareAndSend(post, post.getTitle(), post.getBody());
         postDao.save(post);
         return "redirect:/show-post";
     }
