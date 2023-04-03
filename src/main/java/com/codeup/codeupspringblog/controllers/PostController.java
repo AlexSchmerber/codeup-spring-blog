@@ -34,6 +34,7 @@ class PostController {
 //        return "Post With Id: " + id;
 //    }
 
+
     @GetMapping("/posts/create")
     public String getCreatePost(Model model) {
         model.addAttribute("post", new Post());

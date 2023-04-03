@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 class HomeController {
 
     @GetMapping("/")
-    @ResponseBody
-    public String hello() {
-        return "This is the landing page!";
+    public String defaultPage(){
+        return "redirect:/login";
     }
 
     @GetMapping("/add/{number1}/and/{number2}")
