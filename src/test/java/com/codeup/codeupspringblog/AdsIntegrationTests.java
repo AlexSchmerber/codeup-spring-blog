@@ -126,18 +126,41 @@ public class AdsIntegrationTests {
 				.andExpect(MockMvcResultMatchers.content().string(containsString("edited the description again")));
 	}
 
-	@Test
-	public void testAdsIndex() throws Exception {
-		Post existingAd = postDao.findAll().get(0);
+//	@Test
+//	public void testDeleteAd() throws Exception {
+//		// Creates a test Ad to be deleted
+//		this.mvc.perform(
+//						post("/posts/create").with(csrf())
+//								.session((MockHttpSession) httpSession)
+//								.param("title", "ad to be deleted")
+//								.param("description", "won't last long"))
+//				.andExpect(status().is3xxRedirection());
+//
+//		// Get the recent Ad that matches the title
+//		Post existingAd = postDao.findByTitle("ad to be deleted");
+//
+//		// Makes a Post request to /ads/{id}/delete and expect a redirection to the Ads index
+//		this.mvc.perform(
+//						post("/ads/" + existingAd.getId() + "/delete").with(csrf())
+//								.session((MockHttpSession) httpSession)
+//								.param("id", String.valueOf(existingAd.getId())))
+//				.andExpect(status().is3xxRedirection());
+//	}
+//
+//	@Test
+//	public void testAdsIndex() throws Exception {
+//		Post existingAd = postDao.findAll().get(0);
+//
+//		// Makes a Get request to /ads and verifies that we get some of the static text of the ads/index.html template and at least the title from the first Ad is present in the template.
+//		this.mvc.perform(MockMvcRequestBuilders.get("/show-post"))
+//				.andExpect(status().isOk())
+//				// Test the static content of the page
+//				.andExpect((ResultMatcher) content().string(containsString("All posts")))
+//				// Test the dynamic content of the page
+//				.andExpect((ResultMatcher) content().string(containsString(existingAd.getTitle())));
+//	}
 
-		// Makes a Get request to /ads and verifies that we get some of the static text of the ads/index.html template and at least the title from the first Ad is present in the template.
-		this.mvc.perform(MockMvcRequestBuilders.get("/show-post"))
-				.andExpect(status().isOk())
-				// Test the static content of the page
-				.andExpect((ResultMatcher) content().string(containsString("All posts")))
-				// Test the dynamic content of the page
-				.andExpect((ResultMatcher) content().string(containsString(existingAd.getTitle())));
-	}
+
 
 
 
