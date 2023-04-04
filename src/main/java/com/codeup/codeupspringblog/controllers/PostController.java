@@ -6,6 +6,7 @@ import com.codeup.codeupspringblog.repositories.PostRepository;
 import com.codeup.codeupspringblog.repositories.UserRepository;
 import com.codeup.codeupspringblog.services.EmailService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -53,8 +54,8 @@ class PostController {
     @GetMapping("/index-posts/{postId}")
     public String indexPost(Model model, @PathVariable long postId){
 //        create new post using just id
-//        model.addAttribute("post", new Post(postId, "New Title 1", "New body 1"));
-        model.addAttribute("user", postDao.findById(postId).getUser());
+        model.addAttribute("post", postDao.findById(postId));
+//        model.addAttribute("user", postDao.findById(postId).getUser());
         return "/posts/index";
     }
 
@@ -62,6 +63,14 @@ class PostController {
     public String editPost(Model model, @PathVariable long postId){
         model.addAttribute("post", postDao.getReferenceById(postId));
         return "/posts/edit";
+    }
+
+    @PostMapping("/post/{postId}/edit")
+    public String editPost(@ModelAttribute Post post){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setUser(user);
+        postDao.save(post);
+        return "redirect:/show/post";
     }
 
 
